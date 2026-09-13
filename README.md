@@ -10,22 +10,22 @@ Desarrollamos un modelo de machine learning y un dashboard interactivo para anti
 
 ## Tabla de contenidos
 
-- [Contexto del problema](#-contexto-del-problema)
-- [Dataset](#-dataset)
-- [Metodología](#-metodología)
-- [Arquitectura del prototipo](#-arquitectura-del-prototipo)
-- [Estructura del repositorio](#-estructura-del-repositorio)
-- [Instalación y ejecución](#-instalación-y-ejecución)
-- [Resultados](#-resultados)
-- [Dashboard interactivo](#-dashboard-interactivo)
-- [Hallazgos clave](#-hallazgos-clave)
-- [Limitaciones y consideraciones éticas](#-limitaciones-y-consideraciones-éticas)
-- [Próximos pasos](#-próximos-pasos)
-- [Documentación completa](#-documentación-completa)
-- [Autoras](#-autoras)
+- [Contexto del problema](#contexto-del-problema)
+- [Dataset](#dataset)
+- [Metodología](#metodología)
+- [Arquitectura del prototipo](#arquitectura-del-prototipo)
+- [Estructura del repositorio](#estructura-del-repositorio)
+- [Instalación y ejecución](#instalación-y-ejecución)
+- [Resultados](#resultados)
+- [Dashboard interactivo](#dashboard-interactivo)
+- [Hallazgos clave](#hallazgos-clave)
+- [Limitaciones y consideraciones éticas](#limitaciones-y-consideraciones-éticas)
+- [Próximos pasos](#próximos-pasos)
+- [Documentación completa](#documentación-completa)
+- [Autoras](#autoras)
 
 ---
-
+P
 ## Contexto del problema
 
 La fuga de clientes (*churn*) tiene un impacto directo y medible en la rentabilidad de una entidad financiera: retener a un cliente existente es sistemáticamente más barato que adquirir uno nuevo. Partimos de un coste de adquisición de cliente (CAC) de referencia de **100 USD** y de un escenario de negocio en el que reducir la tasa de churn del **20 % al 15 %** representaría un ahorro estimado de **50.000 USD**.
