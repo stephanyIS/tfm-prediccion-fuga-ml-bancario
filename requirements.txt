@@ -1,0 +1,17 @@
+# Predicción de Fuga de Clientes — dependencias de pipeline_modelado.py
+# Pensado para ejecutarse en Google Colab.
+#
+# pandas, numpy y scikit-learn ya vienen preinstalados en el entorno de Colab
+# (a la fecha de este documento, típicamente pandas 2.2.x, numpy 2.0.x y
+# scikit-learn 1.5.x o superior). No se fijan aquí a propósito: forzar una
+# versión antigua con pip haría que Colab intente reinstalarlas y podría
+# generar conflictos con otras librerías ya preinstaladas en el entorno.
+#
+# La única librería que Colab NO trae preinstalada es imbalanced-learn (para SMOTE):
+imbalanced-learn==0.13.0
+
+# Para fijar TODAS las versiones exactas realmente usadas (recomendado para
+# que cualquiera pueda reproducir exactamente los resultados, dentro o fuera
+# de Colab), corre esto en la misma notebook justo después de ejecutar el
+# pipeline, y reemplaza este archivo con el resultado:
+#   !pip freeze | grep -iE "pandas|numpy|scikit-learn|imbalanced-learn|scipy"
