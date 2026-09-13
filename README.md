@@ -1,4 +1,4 @@
-# 🏦 Predicción de Fuga de Clientes (Customer Churn) en Productos Financieros
+# Predicción de Fuga de Clientes (Customer Churn) en Productos Financieros
 
 Nuestro Trabajo Final de Máster — Máster Universitario en Análisis y Visualización de Datos Masivos (UNIR)
 
