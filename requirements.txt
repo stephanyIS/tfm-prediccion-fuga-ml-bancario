@@ -1,17 +1,42 @@
-# Predicción de Fuga de Clientes — dependencias de pipeline_modelado.py
-# Pensado para ejecutarse en Google Colab.
+# ============================================================================
+# Predicción de Fuga de Clientes (Customer Churn) en Productos Financieros
+# Dependencias de pipeline_modelado.py
+# ============================================================================
 #
-# pandas, numpy y scikit-learn ya vienen preinstalados en el entorno de Colab
-# (a la fecha de este documento, típicamente pandas 2.2.x, numpy 2.0.x y
-# scikit-learn 1.5.x o superior). No se fijan aquí a propósito: forzar una
-# versión antigua con pip haría que Colab intente reinstalarlas y podría
-# generar conflictos con otras librerías ya preinstaladas en el entorno.
+# Entorno de referencia: Google Colab (Python 3.12).
+# Versiones exactas que verificamos con `pip freeze` en nuestro entorno,
+# justo después de ejecutar el pipeline completo (limpieza, feature
+# engineering, SMOTE, entrenamiento y evaluación de los modelos).
 #
-# La única librería que Colab NO trae preinstalada es imbalanced-learn (para SMOTE):
-imbalanced-learn==0.13.0
+# Instalación:
+#   pip install -r requirements.txt
+#   (en Google Colab: !pip install -r requirements.txt)
+#
+# ----------------------------------------------------------------------------
+# Manipulación y estructura de datos
+# ----------------------------------------------------------------------------
+numpy==2.1.3           # Álgebra vectorial y matricial; base de pandas y scikit-learn
+pandas==2.2.3          # Carga y manipulación del dataset, feature engineering (Sección 3.3)
 
-# Para fijar TODAS las versiones exactas realmente usadas (recomendado para
-# que cualquiera pueda reproducir exactamente los resultados, dentro o fuera
-# de Colab), corre esto en la misma notebook justo después de ejecutar el
-# pipeline, y reemplaza este archivo con el resultado:
-#   !pip freeze | grep -iE "pandas|numpy|scikit-learn|imbalanced-learn|scipy"
+# ----------------------------------------------------------------------------
+# Modelado y evaluación
+# ----------------------------------------------------------------------------
+scipy==1.16.3          # Funciones estadísticas y de optimización usadas internamente por scikit-learn
+scikit-learn==1.6.1    # Partición train/test, validación cruzada k=5, Regresión Logística,
+                       # Random Forest y métricas de evaluación (AUC-ROC, Recall, Precision, F1)
+
+# ----------------------------------------------------------------------------
+# Balanceo de clases
+# ----------------------------------------------------------------------------
+imbalanced-learn==0.14.2   # SMOTE, aplicado únicamente sobre el conjunto de entrenamiento (Sección 3.4)
+
+# ----------------------------------------------------------------------------
+# Notas
+# ----------------------------------------------------------------------------
+# - La persistencia en SQLite (churn_pipeline.sqlite) usa el módulo sqlite3
+#   de la biblioteca estándar de Python; no requiere instalación aparte.
+# - El informe (Anexo B) indica Python 3.9+ como requisito mínimo; nosotras
+#   desarrollamos y probamos el pipeline en Python 3.12 (Google Colab).
+# - Si el pipeline incorpora nuevas librerías más adelante (por ejemplo,
+#   XGBoost o SHAP, ver Sección 8.6 del informe), agrégalas aquí con su
+#   versión exacta, obtenida de la misma forma con `pip freeze`.
