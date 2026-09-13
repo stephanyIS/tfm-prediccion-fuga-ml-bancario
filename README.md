@@ -8,7 +8,7 @@ Desarrollamos un modelo de machine learning y un dashboard interactivo para anti
 
 ---
 
-## 📑 Tabla de contenidos
+## Tabla de contenidos
 
 - [Contexto del problema](#-contexto-del-problema)
 - [Dataset](#-dataset)
@@ -26,7 +26,7 @@ Desarrollamos un modelo de machine learning y un dashboard interactivo para anti
 
 ---
 
-## 🎯 Contexto del problema
+## Contexto del problema
 
 La fuga de clientes (*churn*) tiene un impacto directo y medible en la rentabilidad de una entidad financiera: retener a un cliente existente es sistemáticamente más barato que adquirir uno nuevo. Partimos de un coste de adquisición de cliente (CAC) de referencia de **100 USD** y de un escenario de negocio en el que reducir la tasa de churn del **20 % al 15 %** representaría un ahorro estimado de **50.000 USD**.
 
@@ -35,7 +35,7 @@ Nos planteamos un objetivo doble:
 1. **Predictivo:** construir un modelo capaz de identificar, con antelación, qué clientes tienen mayor probabilidad de abandonar la entidad.
 2. **Prescriptivo:** traducir esas predicciones en una herramienta operativa (dashboard) que el área de negocio pueda usar para priorizar campañas de retención.
 
-## 📊 Dataset
+## Dataset
 
 | | |
 |---|---|
@@ -47,7 +47,7 @@ Nos planteamos un objetivo doble:
 
 Variables principales: `CreditScore`, `Geography`, `Gender`, `Age`, `Tenure`, `Balance`, `NumOfProducts`, `HasCrCard`, `IsActiveMember`, `EstimatedSalary`.
 
-## 🧪 Metodología
+## Metodología
 
 Seguimos el marco **CRISP-DM**. Así resumimos el tratamiento de datos y el modelado que aplicamos (el detalle completo está en el informe, Sección 3):
 
@@ -60,7 +60,7 @@ Seguimos el marco **CRISP-DM**. Así resumimos el tratamiento de datos y el mode
 7. **Validación:** validación cruzada de 5 pliegues (k=5).
 8. **Modelos comparados:** Regresión Logística (interpretable) vs. Random Forest (mejor desempeño).
 
-## 🏗️ Arquitectura del prototipo
+## Arquitectura del prototipo
 
 ```
  Churn_Modelling.csv
@@ -80,7 +80,7 @@ Seguimos el marco **CRISP-DM**. Así resumimos el tratamiento de datos y el mode
 
 Elegimos Python como pipeline principal. El flujo de KNIME (documentado en `docs/`) es la ruta de referencia equivalente que dejamos documentada, útil para auditar o reproducir el proceso sin necesidad de un entorno de programación.
 
-## 📁 Estructura del repositorio
+## Estructura del repositorio
 
 ```
 .
@@ -97,7 +97,7 @@ Elegimos Python como pipeline principal. El flujo de KNIME (documentado en `docs
     └── knime_flow.pdf         # Flujo equivalente en KNIME Analytics Platform
 ```
 
-## ⚙️ Instalación y ejecución
+## Instalación y ejecución
 
 ### Requisitos
 - Google Colab (nuestro entorno de desarrollo) o Python 3.9+ en local
@@ -139,7 +139,7 @@ Abre `dashboard/Dashboard_Churn_TFM_Seminario.pbix` en Power BI Desktop apuntand
 
 El flujo equivalente en KNIME está documentado en `docs/`, para quien prefiera ejecutar o auditar el proceso de forma visual.
 
-## 📈 Resultados
+## Resultados
 
 | Métrica (holdout, 2.000 registros) | Regresión Logística | Random Forest |
 |---|---|---|
@@ -156,7 +156,7 @@ El umbral de decisión es ajustable (rango 0,10–0,90 en el dashboard); en el r
 ### Variables más predictivas
 Encontramos que `NumOfProducts`, `Age` e `IsActiveMember` son, de forma consistente en ambos modelos, los predictores más fuertes de churn.
 
-## 📊 Dashboard interactivo
+## Dashboard interactivo
 
 Construimos el dashboard en Power BI (`Dashboard_Churn_TFM_Seminario.pbix`) con medidas DAX dinámicas ligadas a un parámetro de umbral, de modo que recalcula sus indicadores en vivo sin necesidad de reentrenar el modelo. Tiene tres vistas:
 
@@ -166,7 +166,7 @@ Construimos el dashboard en Power BI (`Dashboard_Churn_TFM_Seminario.pbix`) con 
 | **Análisis de Riesgo** | Dispersión Age–Balance coloreada por predicción, y barras de probabilidad media de churn por número de productos |
 | **Priorización Operativa** | Tabla de los 100 clientes con mayor riesgo, ordenada por probabilidad de churn |
 
-## 🔍 Hallazgos clave
+## Hallazgos clave
 
 Esto es lo que encontramos al analizar los resultados:
 
@@ -174,7 +174,7 @@ Esto es lo que encontramos al analizar los resultados:
 - Los segmentos de mayor riesgo combinan: edad entre 45 y 65 años, 3-4 productos contratados, inactividad, y residencia en Alemania.
 - El umbral de decisión es una palanca de negocio, no solo un parámetro técnico: moverlo entre 0,3 y 0,4 permite a negocio elegir explícitamente entre capturar más clientes en riesgo (mayor Recall) o reducir falsos positivos (mayor Precision).
 
-## ⚠️ Limitaciones y consideraciones éticas
+## Limitaciones y consideraciones éticas
 
 Reconocemos las siguientes limitaciones en nuestro trabajo:
 
@@ -182,7 +182,7 @@ Reconocemos las siguientes limitaciones en nuestro trabajo:
 - `Geography` y `Gender` mejoran el desempeño predictivo, pero su uso comercial directo requiere una **auditoría de equidad (fairness)** previa, para evitar un impacto dispar sobre grupos protegidos.
 - Los resultados deben validarse frente a datos productivos reales antes de cualquier implementación operativa; el rendimiento que obtuvimos sobre el dataset de Kaggle no garantiza el mismo desempeño en producción.
 
-## 🚀 Próximos pasos
+## Próximos pasos
 
 Estos son los próximos pasos que nos planteamos como equipo:
 
@@ -192,11 +192,11 @@ Estos son los próximos pasos que nos planteamos como equipo:
 - Explorar modelado de supervivencia con datos longitudinales.
 - Validar el impacto real del modelo mediante un piloto controlado de intervenciones de retención.
 
-## 📚 Documentación completa
+## Documentación completa
 
 En este repositorio dejamos el **prototipo funcional** del proyecto (código, modelo de datos y dashboard). El informe completo que elaboramos —con la justificación de negocio, el análisis exploratorio de datos, la metodología detallada, la evaluación de resultados, las conclusiones, las recomendaciones y el plan de implementación— lo entregamos como documento independiente (Secciones 1 a 9 del TFM).
 
-## 👥 Autoras
+## Autoras
 
 - **Diana Andrea Carballo Sarabia**
 - **Stephany Rosario Pineda Sauceda**
