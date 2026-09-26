@@ -25,7 +25,6 @@ Desarrollamos un modelo de machine learning y un dashboard interactivo para anti
 - [Autoras](#autoras)
 
 ---
-P
 ## Contexto del problema
 
 La fuga de clientes (*churn*) tiene un impacto directo y medible en la rentabilidad de una entidad financiera: retener a un cliente existente es sistemáticamente más barato que adquirir uno nuevo. Partimos de un coste de adquisición de cliente (CAC) de referencia de **100 USD** y de un escenario de negocio en el que reducir la tasa de churn del **20 % al 15 %** representaría un ahorro estimado de **50.000 USD**.
@@ -93,7 +92,8 @@ El pipeline completo incluye limpieza de datos, feature engineering, SMOTE (bala
 │   ├── churn_data_powerbi.xlsx# Dataset para Power BI
 │   ├── boxplots_outliers.png  # Visualización: análisis de outliers
 │   ├── corr_heatmap.png       # Visualización: matriz de correlación
-│   └── histograms_dist.png    # Visualización: distribuciones de variables
+│   ├── histograms_dist.png    # Visualización: distribuciones de variables
+│   └── scatter_age_balance.png # Visualización: dispersión Age–Balance
 ├── db/
 │   └── churn_pipeline.sqlite  # Base de datos generada por el pipeline (redundante con src/)
 ├── dashboard/
@@ -163,7 +163,7 @@ Construimos el dashboard en Power BI (`Dashboard_Churn_TFM_Seminario_f.pbix`) co
 |---|---|
 | **Resumen Ejecutivo** | 4 tarjetas KPI (`Ahorro_Estimado_USD`, `Tasa_Churn_Global`, `Recall_Dinamico`, `Clientes_En_Riesgo`) + 2 controles deslizantes (umbral de decisión y edad) |
 | **Análisis de Riesgo** | Dispersión Age–Balance coloreada por predicción, y barras de probabilidad media de churn por número de productos |
-| **Priorización Operativa** | Tabla de los 100 clientes con mayor riesgo, ordenada por probabilidad de churn |
+| **Tabla Operativa de Retención** | Tabla de los 100 clientes con mayor riesgo, ordenada por probabilidad de churn |
 
 ## Hallazgos clave
 
