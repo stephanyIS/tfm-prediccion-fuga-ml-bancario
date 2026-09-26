@@ -62,23 +62,21 @@ Seguimos el marco **CRISP-DM**. Así resumimos el tratamiento de datos y el mode
 
 ## Arquitectura del prototipo
 
+El pipeline de modelado está implementado en los notebooks de `src/`:
+
 ```
  Churn_Modelling.csv
         │
         ▼
- pipeline_modelado.py  ──────►  churn_pipeline.sqlite
- (Python: pandas,               (train_preprocessed,
-  scikit-learn,                  test_predictions)
-  imbalanced-learn)                     │
+ Cuadernos Python (src/)      ──────►  churn_pipeline.sqlite
+ (pandas, scikit-learn,              (train_preprocessed,
+  scipy, numpy)                      test_predictions)
         │                               ▼
-        │                    Dashboard_Churn_TFM_Seminario.pbix
+        │                    Dashboard_Churn_TFM_Seminario_f.pbix
         │                    (Power BI — 3 vistas interactivas)
-        ▼
- Flujo equivalente en KNIME Analytics Platform
- (ruta alternativa sin código, ver docs/)
 ```
 
-Elegimos Python como pipeline principal. El flujo de KNIME (documentado en `docs/`) es la ruta de referencia equivalente que dejamos documentada, útil para auditar o reproducir el proceso sin necesidad de un entorno de programación.
+El pipeline completo incluye limpieza de datos, feature engineering, SMOTE (balanceo de clases), validación cruzada, y evaluación de modelos (Regresión Logística vs. Random Forest).
 
 ## Estructura del repositorio
 
@@ -86,15 +84,22 @@ Elegimos Python como pipeline principal. El flujo de KNIME (documentado en `docs
 .
 ├── README.md
 ├── requirements.txt
-├── data/                      # Churn_Modelling.csv (o instrucciones de descarga)
+├── data/                      # Churn_Modelling.csv (dataset)
 ├── src/
-│   └── pipeline_modelado.py   # Pipeline completo: limpieza → feature engineering → SMOTE → modelado → evaluación
+│   ├── Modelado_de_datos_Seminario_de_Investigación.ipynb  # Pipeline: limpieza → feature engineering → SMOTE → modelado
+│   ├── Código_Python_para_el_EDA_completo_f.ipynb          # Análisis Exploratorio de Datos (EDA)
+│   ├── churn_pipeline.sqlite  # Base de datos con predicciones
+│   ├── churn_data.xlsx        # Dataset procesado (exportación auxiliar)
+│   ├── churn_data_powerbi.xlsx# Dataset para Power BI
+│   ├── boxplots_outliers.png  # Visualización: análisis de outliers
+│   ├── corr_heatmap.png       # Visualización: matriz de correlación
+│   └── histograms_dist.png    # Visualización: distribuciones de variables
 ├── db/
-│   └── churn_pipeline.sqlite  # Base de datos generada por el pipeline
+│   └── churn_pipeline.sqlite  # Base de datos generada por el pipeline (redundante con src/)
 ├── dashboard/
-│   └── Dashboard_Churn_TFM_Seminario.pbix   # Dashboard en Power BI
-└── docs/
-    └── knime_flow.pdf         # Flujo equivalente en KNIME Analytics Platform
+│   └── Dashboard_Churn_TFM_Seminario_f.pbix  # Dashboard interactivo en Power BI
+└── Claude outputs/
+    └── Documentación de procesos y onboarding
 ```
 
 ## Instalación y ejecución
@@ -120,24 +125,18 @@ cd tfm-prediccion-fuga-ml-bancario
 pip install -r requirements.txt
 ```
 
-### 2. Ejecutar el pipeline
+### 2. Ejecutar el análisis y el modelado
 
-Coloca `Churn_Modelling.csv` en `data/` y ejecuta:
+Coloca `Churn_Modelling.csv` en `data/` y ejecuta los cuadernos en orden:
 
-```python
-!python src/pipeline_modelado.py          # en Colab
-python src/pipeline_modelado.py           # en local
-```
+1. **Cuaderno EDA** (`src/Código_Python_para_el_EDA_completo_f.ipynb`): Análisis exploratorio de datos, visualizaciones y detección de outliers.
+2. **Cuaderno de Modelado** (`src/Modelado_de_datos_Seminario_de_Investigación.ipynb`): Pipeline completo (limpieza, feature engineering, SMOTE, validación cruzada, entrenamiento y evaluación de modelos).
 
-Esto reproduce de forma determinista (`random_state = 42`) todo el proceso que diseñamos —limpieza, feature engineering, SMOTE, validación cruzada, entrenamiento y evaluación— y regenera `db/churn_pipeline.sqlite`.
+Estos cuadernos reproducen de forma determinista (`random_state = 42`) todo el proceso, generan las predicciones y crean `churn_pipeline.sqlite`.
 
 ### 3. Explorar el dashboard
 
-Abre `dashboard/Dashboard_Churn_TFM_Seminario.pbix` en Power BI Desktop apuntando a las tablas regeneradas en el paso anterior.
-
-### 4. Ruta alternativa sin Python
-
-El flujo equivalente en KNIME está documentado en `docs/`, para quien prefiera ejecutar o auditar el proceso de forma visual.
+Abre `dashboard/Dashboard_Churn_TFM_Seminario_f.pbix` en Power BI Desktop y apunta a las tablas enviadas con los datos, o regeneradas en el paso anterior.
 
 ## Resultados
 
@@ -158,7 +157,7 @@ Encontramos que `NumOfProducts`, `Age` e `IsActiveMember` son, de forma consiste
 
 ## Dashboard interactivo
 
-Construimos el dashboard en Power BI (`Dashboard_Churn_TFM_Seminario.pbix`) con medidas DAX dinámicas ligadas a un parámetro de umbral, de modo que recalcula sus indicadores en vivo sin necesidad de reentrenar el modelo. Tiene tres vistas:
+Construimos el dashboard en Power BI (`Dashboard_Churn_TFM_Seminario_f.pbix`) con medidas DAX dinámicas ligadas a un parámetro de umbral, de modo que recalcula sus indicadores en vivo sin necesidad de reentrenar el modelo. Tiene tres vistas:
 
 | Vista | Contenido |
 |---|---|

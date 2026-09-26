@@ -28,7 +28,9 @@ scikit-learn==1.6.1    # Partición train/test, validación cruzada k=5, Regresi
 # ----------------------------------------------------------------------------
 # Balanceo de clases
 # ----------------------------------------------------------------------------
-imbalanced-learn==0.14.2   # SMOTE, aplicado únicamente sobre el conjunto de entrenamiento (Sección 3.4)
+# NOTA: SMOTE se implementa a mano en el código (ver Sección 3.3.7 del informe).
+# imbalanced-learn NO es una dependencia requerida.
+# imbalanced-learn==0.14.2   # [DESCARTADA] — SMOTE es custom; descomentar solo si se implementa uso de imblearn en futuro
 
 # ----------------------------------------------------------------------------
 # Notas
