@@ -48,6 +48,20 @@ env/
 .ipynb_checkpoints/
 *.ipynb_checkpoints
 
+# Archivos de salida generados por ejecución de celdas
+*.png
+*.xlsx
+*.sqlite
+Claude outputs/
+src/boxplots_outliers.png
+src/class_distribution_imbalance.png
+src/corr_heatmap.png
+src/histograms_dist.png
+src/scatter_age_balance.png
+src/churn_data.xlsx
+src/churn_data_powerbi.xlsx
+src/churn_pipeline.sqlite
+
 # Sistema operativo
 Thumbs.db
 .DS_Store
